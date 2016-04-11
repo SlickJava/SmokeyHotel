@@ -12,6 +12,7 @@ public class Main {
 	public void testMethod()
 	{
 		System.out.println("testMethod();");
+		System.out.println("testCommit 2: (added .gitignore settings)");
 	}
 
 }
