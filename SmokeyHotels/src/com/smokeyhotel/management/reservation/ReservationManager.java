@@ -1,11 +1,11 @@
 package com.smokeyhotel.management.reservation;
 
-import com.smokeyhotel.room.Room;
+import java.util.ArrayList;
 
 public class ReservationManager {
 	
-	//private ArrayList<Reservation> reservations = new ArrayList<Reservation>();
-	//private ArrayList<Room> rooms = new ArrayList<Room>();
+	public ArrayList<Reservation> reservations = new ArrayList<Reservation>();
+	
 	
 
 
