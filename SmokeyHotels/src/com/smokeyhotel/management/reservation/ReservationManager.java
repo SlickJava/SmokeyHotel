@@ -34,6 +34,29 @@ public class ReservationManager {
 			this.rooms.add(room[i]);
 		}
 	}
+	
+	public void printGuests()
+	{
+		for(int i = 0; i < guests.size(); i++)
+		{
+			System.out.println(guests.get(i).getName() + " Age:" + guests.get(i).getAge());
+		}
+	}
+	
+	public ArrayList<Reservation> getReservations()
+	{
+		return this.reservations;
+	}
+	
+	public ArrayList<Guest> getGuests()
+	{
+		return this.guests;
+	}
+	
+	public ArrayList<Room> getRooms()
+	{
+		return this.rooms;
+	}
 
 
 }
