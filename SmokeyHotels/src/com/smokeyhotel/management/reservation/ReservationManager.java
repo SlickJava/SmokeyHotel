@@ -39,7 +39,10 @@ public class ReservationManager {
 	{
 		for(int i = 0; i < guests.size(); i++)
 		{
-			System.out.println(guests.get(i).getName() + " Age:" + guests.get(i).getAge());
+			System.out.println("Name: " + guests.get(i).getName()
+					+ " | Age: " + guests.get(i).getAge()
+					+ " | Phone: " + guests.get(i).getPhone()
+					+ " | Credit Card Number: " + guests.get(i).getCreditCardNumber());
 		}
 	}
 	
