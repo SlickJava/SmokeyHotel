@@ -1,5 +1,7 @@
 package com.smokeyhotel.management.reservation;
 
+import java.util.ArrayList;
+
 import com.smokeyhotel.people.Person;
 import com.smokeyhotel.people.guest.Guest;
 import com.smokeyhotel.room.Room;
@@ -33,27 +35,16 @@ public class Reservation {
 
 	public Guest[] getOccupants()
 	{
-		int guests = 0;
+		ArrayList<Guest> guests = new ArrayList<>();
 		for(int i = 0; i < rooms.length; i++)
 		{
 			for(int j = 0; j < rooms[i].getOccupants().length; j++)
 			{
 				
-				guests++;
 			}
 		}
-		Guest[] fatMen = new Guest[guests];
-		int index = 0;
-		for(int i = 0; i < rooms.length; i++)
-		{
-			for(int j = 0; j < rooms[i].getOccupants().length; j++)
-			{
-				index++;
-				fatMen[index] = 
-			}
-		}
-		return fatMen;
-		
+		// Convert to array
+		return (Guest[]) guests.toArray();
 	}
 	
 	public Guest getMaster() {
