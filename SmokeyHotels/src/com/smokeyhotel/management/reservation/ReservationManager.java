@@ -3,6 +3,7 @@ package com.smokeyhotel.management.reservation;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import com.smokeyhotel.management.database.Database;
 import com.smokeyhotel.people.guest.Guest;
 import com.smokeyhotel.room.Room;
 
@@ -15,11 +16,13 @@ public class ReservationManager {
 	public void createReservation(Reservation reservation)
 	{
 		this.reservations.add(reservation);
-		
 		this.addRooms(reservation.getRooms());
 		this.addGuests();
 	}
 	
+	/*
+	 * Delete Reservation, returns false if reservation is not in the reservations ArrayList
+	 */
 	public boolean deleteReservation(Reservation reservation)
 	{
 		for(Reservation res : reservations)
