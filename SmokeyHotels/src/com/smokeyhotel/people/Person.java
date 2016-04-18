@@ -1,5 +1,10 @@
 package com.smokeyhotel.people;
 
+/**
+ * Person Base Class.
+ * @author SlickJava & InsaneAboutTNT
+ */
+
 public class Person {
 	
 	private int age;

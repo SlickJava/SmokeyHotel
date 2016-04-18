@@ -4,10 +4,25 @@ import java.sql.Date;
 
 import com.smokeyhotel.people.Person;
 
+/**
+ * Guest Object Class.
+ * @author SlickJava & InsaneAboutTNT
+ */
+
 public class Guest extends Person{
 	
 	private String creditCardNumber;
 	
+	/**
+	 * Constructor:
+	 * 
+	 * @param age 
+	 * @param name
+	 * @param address 
+	 * @param suburb 
+	 * @param phone 
+	 * @param creditCardNumber
+	 */
 	public Guest(int age, String name, String address, String suburb,
 			String phone, String creditCardNumber) {
 		super(age, name, address, suburb, phone);
