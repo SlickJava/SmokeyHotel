@@ -45,9 +45,10 @@ public class Reservation {
 		ArrayList<Guest> guests = new ArrayList<>();
 		for(int i = 0; i < rooms.length; i++)
 		{
+			Guest[] roomGuests = rooms[i].getOccupants();
 			for(int j = 0; j < rooms[i].getOccupants().length; j++)
 			{
-				
+				guests.add(roomGuests[j]);
 			}
 		}
 		// Convert to array
