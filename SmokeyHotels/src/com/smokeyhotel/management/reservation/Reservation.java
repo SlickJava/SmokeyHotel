@@ -7,14 +7,12 @@ import com.smokeyhotel.room.Room;
 public class Reservation {
 	
 	private Guest master;
-	private Guest[] occupants;
 	private Room rooms[];
 	
-	public Reservation(Guest master, Guest occupants[], Room rooms[])
+	public Reservation(Guest master, Room rooms[])
 	{
 		this.master = master;
 		this.rooms = rooms;
-		this.occupants = occupants;
 	}
 
 	public Room[] getRooms()
@@ -32,19 +30,30 @@ public class Reservation {
 		return rNumbers;
 	}
 	
+
 	public Guest[] getOccupants()
 	{
-		return this.occupants;
-	}
-	
-	public String[] getOccupantNames()
-	{
-		String[] oNames = new String[occupants.length];
-		for(int i = 0; i < occupants.length; i++)
+		int guests = 0;
+		for(int i = 0; i < rooms.length; i++)
 		{
-			oNames[i] = occupants[i].getName();
+			for(int j = 0; j < rooms[i].getOccupants().length; j++)
+			{
+				
+				guests++;
+			}
 		}
-		return oNames;
+		Guest[] fatMen = new Guest[guests];
+		int index = 0;
+		for(int i = 0; i < rooms.length; i++)
+		{
+			for(int j = 0; j < rooms[i].getOccupants().length; j++)
+			{
+				index++;
+				fatMen[index] = 
+			}
+		}
+		return fatMen;
+		
 	}
 	
 	public Guest getMaster() {

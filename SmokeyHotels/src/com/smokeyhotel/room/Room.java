@@ -1,40 +1,56 @@
 package com.smokeyhotel.room;
 
-import com.smokeyhotel.people.Person;
+import com.smokeyhotel.people.guest.Guest;
 
 public class Room {
 
 	private int number;
-	private boolean status;
+	private boolean vacant;
 	private double price;
-	private Person person;
+	private RoomState roomState;
+	private Guest[] occupants;
 	
-	public Room(int number, boolean status, double price, Person person)
+	public Room(int number, boolean vacant, RoomState roomState, double price, Guest[] occupants)
 	{
 		this.number = number;
-		this.status = status;
+		this.vacant = vacant;
 		this.price = price;
-		this.person = person;
+		this.occupants = occupants;
+		this.roomState = roomState;
 	}
 
 	public int getNumber() {
 		return number;
 	}
+	
+	public void setRoomState(RoomState state)
+	{
+		this.roomState = state;
+	}
 
-	public Person getPerson() {
-		return this.person;
+	public RoomState getRoomState()
+	{
+		return roomState;
 	}
 	
+	public Guest[] getOccupants() {
+		return occupants;
+	}
+	
+	public void setOccupants(Guest[] guest) {
+		this.occupants = guest;
+	}
+
 	public void setNumber(int number) {
 		this.number = number;
 	}
 
-	public boolean isStatus() {
-		return status;
+	public boolean isVacant() {
+		return vacant;
 	}
 
-	public void setStatus(boolean status) {
-		this.status = status;
+	public void setVacant(boolean vacant) {
+		this.vacant = vacant;
 	}
 
 	public double getPrice() {
