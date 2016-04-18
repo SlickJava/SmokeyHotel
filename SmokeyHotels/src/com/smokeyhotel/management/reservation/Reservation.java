@@ -10,13 +10,20 @@ public class Reservation {
 	
 	private Guest master;
 	private Room rooms[];
+	private long id;
 	
-	public Reservation(Guest master, Room rooms[])
+	public Reservation(long id,Guest master, Room rooms[])
 	{
 		this.master = master;
 		this.rooms = rooms;
+		this.id = id;
 	}
 
+	public long getId()
+	{
+		return this.id;
+	}
+	
 	public Room[] getRooms()
 	{
 		return this.rooms;

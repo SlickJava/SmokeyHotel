@@ -15,8 +15,24 @@ public class ReservationManager {
 	public void createReservation(Reservation reservation)
 	{
 		this.reservations.add(reservation);
+		
 		this.addRooms(reservation.getRooms());
 		this.addGuests();
+	}
+	
+	public boolean deleteReservation(Reservation reservation)
+	{
+		for(Reservation res : reservations)
+		{
+			if(res.equals(reservation))
+			{
+				reservations.remove(reservation);
+			}else
+			{
+				return false;
+			}
+		}
+		return true;
 	}
 	
 	public void addGuests()
