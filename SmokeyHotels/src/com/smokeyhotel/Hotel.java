@@ -31,7 +31,7 @@ public class Hotel {
 		rooms[0] = new Room(569,false,RoomState.DAMAGED,500.00,occupants);
 		
 		//CREATE RESERVATION
-		res.createReservation(new Reservation(master,occupants,rooms));
+		res.createReservation(new Reservation(master,rooms));
 		
 		//PRINT GUESTS
 		res.printGuests();
