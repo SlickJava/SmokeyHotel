@@ -29,7 +29,6 @@ public abstract class ListResultMapper<RowType> implements ResultMapper<List<Row
 		}
 		return list;
 	}
-	
 	public abstract RowType mapRow(ResultSet resultSet) throws SQLException;
 
 }
