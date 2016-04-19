@@ -25,7 +25,7 @@ public class Hotel {
 	public static void main(String args[])
 	{
 		Manager manager = new Manager();
-		manager.initiateCommand(manager.readMessage());
+		manager.initiateCommandListener();
 		
 	}
 

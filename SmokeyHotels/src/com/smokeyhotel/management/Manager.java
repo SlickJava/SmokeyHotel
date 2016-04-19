@@ -55,14 +55,25 @@ public class Manager {
 				command.setInputs(inputs);
 				command.onExecute();
 				
+			}else
+			{
+				System.out.println("Unkown message: " + message);
 			}
 		}
 	}
 	
-	
-	
-	
-	
-	
+	/**
+	 * Initiates command listener. Listeners from commands.
+	 **/
+	public void initiateCommandListener()
+	{
+	    while (true) {
+	    	String input = this.readMessage();
+	        this.initiateCommand(input);
+	        if(input.equals("exit")){
+	            break;
+	        }
+	    }
+	}
 	
 }

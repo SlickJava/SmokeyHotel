@@ -7,7 +7,7 @@ public abstract class Command {
 	private String message;
 	private String commandName;
 	private String[] parameters;
-	private String[] inputs;
+	protected String[] inputs;
 	public Database database;
 	
 	public Command(String commandName, String message, String[] parameters, Database database)
@@ -26,6 +26,12 @@ public abstract class Command {
 	{
 		this.inputs = inputs;
 	}
+	
+	public String[] getInputs()
+	{
+		return this.inputs;
+	}
+	
 	public String getMessage()
 	{
 		return this.message;

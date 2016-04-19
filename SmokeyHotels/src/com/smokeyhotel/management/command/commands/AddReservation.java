@@ -12,12 +12,15 @@ public class AddReservation extends Command{
 
 	@Override
 	public void onExecute() {
-		// TODO Auto-generated method stub
 		
+		for(int i = 0; i < this.inputs.length; i++)
+		{
+			System.out.println(this.inputs[i]);
+		}
 	}
 	
 	public void allocateRooms() {
-		
+
 	}
 
 }
