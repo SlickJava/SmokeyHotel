@@ -1,24 +1,31 @@
 package com.smokeyhotel.management;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.smokeyhotel.management.command.Command;
-import com.smokeyhotel.management.command.CommandManager;
+import com.smokeyhotel.management.command.commands.AddReservation;
 import com.smokeyhotel.management.database.Database;
 import com.smokeyhotel.management.reservation.ReservationManager;
 
 public class Manager {
 	
+	private ArrayList<Command> commands = new ArrayList<Command>();
 	private ReservationManager reservationManager;
-	private CommandManager commandManager;
 	private Database database;
 	private Scanner scanner;
 	
 	public Manager()
 	{
+		scanner = new Scanner(System.in);
 		database = new Database();
 		reservationManager = new ReservationManager();
-		commandManager = new CommandManager(database);
+		this.addCommands();
+	}
+	
+	public void addCommands()
+	{
+		commands.add(new AddReservation(database));
 	}
 	
 	public String readMessage()
@@ -29,18 +36,23 @@ public class Manager {
 	
 	public void initiateCommand(String message)
 	{
-		String[] split = message.split(" ");
-		for(Command command : commandManager.commands)
+		System.out.println(message + "- Message");
+		String[] split = message.split(" ");		
+		for(Command command : commands)
 		{
-			if(command.getMessage() == split[0])
+			if(command.getMessage().equals(split[0]))
 			{
+				System.out.println(split[0] + "-" + command.getCommandName());
 				String[] inputs = new String[command.getParameters().length];
-				for(int i = 1; i < command.getParameters().length; i++)
+				for(int i = 0; i < command.getParameters().length; i++)
 				{
-					split[i] = inputs[i-1];
+					System.out.println("reached");
+					inputs[i] = split[i+1];
 				}
 				command.setInputs(inputs);
+				System.out.println(inputs[0] + "-" + command.getCommandName());
 				command.onExecute();
+				
 			}
 		}
 	}

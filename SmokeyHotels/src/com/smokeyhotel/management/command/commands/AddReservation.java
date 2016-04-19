@@ -6,7 +6,7 @@ import com.smokeyhotel.management.database.Database;
 public class AddReservation extends Command{
 
 	public AddReservation(Database database) {
-		super("AddReservation", "add reservation", new String[] {"master","guests"}, database);
+		super("AddReservation", "addreservation", new String[] {"master","guests"}, database);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -22,6 +22,6 @@ public class AddReservation extends Command{
 	
 
 	
-	
+
 
 }

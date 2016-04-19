@@ -3,6 +3,7 @@ package com.smokeyhotel;
 import javax.sql.DataSource;
 
 import com.awesome.db.Query;
+import com.smokeyhotel.management.Manager;
 import com.smokeyhotel.management.reservation.Reservation;
 import com.smokeyhotel.management.reservation.ReservationManager;
 import com.smokeyhotel.people.guest.Guest;
@@ -21,7 +22,8 @@ public class Hotel {
 	 */
 	public static void main(String args[])
 	{
-
+		Manager manager = new Manager();
+		manager.initiateCommand(manager.readMessage());
 		
 	}
 
