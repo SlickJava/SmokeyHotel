@@ -13,11 +13,12 @@ public class ReservationManager {
 	public ArrayList<Guest> guests = new ArrayList<Guest>();
 	public ArrayList<Room> rooms = new ArrayList<Room>();
 	
-	public void createReservation(Reservation reservation)
+	public void createReservation(Reservation reservation, Database database)
 	{
 		this.reservations.add(reservation);
-		this.addRooms(reservation.getRooms());
-		this.addGuests();
+		database.insertReservation(reservation);
+		this.addRooms(reservation.getRooms(), database);
+		this.addGuests(database);
 	}
 	
 	/*
@@ -38,17 +39,25 @@ public class ReservationManager {
 		return true;
 	}
 	
-	public void addGuests()
+	public void addGuests(Database database)
 	{
 		for(Room room : this.rooms)
 		{
 			this.guests.addAll(Arrays.asList(room.getOccupants()));
 		}
+		for(Guest guest : this.guests)
+		{
+			database.insertGuest(guest);
+		}
 	}
 	
-	public void addRooms(Room[] room)
+	public void addRooms(Room[] room, Database database)
 	{
 		rooms.addAll(Arrays.asList(room));
+		for(Room r00m : this.rooms)
+		{
+			database.insertRoom(r00m);
+		}
 	}
 	
 	public void printGuests()
