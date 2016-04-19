@@ -11,8 +11,18 @@ import com.smokeyhotel.management.reservation.Reservation;
 import com.smokeyhotel.people.guest.Guest;
 import com.smokeyhotel.room.Room;
 
+/**
+ * @author InsaneAboutTNT
+ * This class houses the database
+ * and provides methods for adding and
+ * deleting data in the hotel database.
+ */
 public class Database {
 	AwesomeDatabase awesomeDatabase;
+	/**
+	 * Initiate a data source and
+	 * make a new AwesomeDatabase to use
+	 */
 	public Database() {
 		try {
 			FileReader reader = new FileReader("config.properties");
@@ -25,20 +35,33 @@ public class Database {
 			dataSource.setURL(props.getProperty("url"));
 			awesomeDatabase = new AwesomeDatabase(dataSource);
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
+	/**
+	 * Add a reservation
+	 * @param reservation
+	 */
 	public void insertReservation(Reservation reservation) {
-		
+		// TODO
+		awesomeDatabase.createQuery("insert into app.reservation () values ()");
 	}
+	/**
+	 * Add a guest
+	 * @param guest
+	 */
 	public void insertGuest(Guest guest) {
-		
+		// TODO
+		awesomeDatabase.createQuery("insert into app.guests () values ()");
 	}
+	/**
+	 * Add a room
+	 * @param room
+	 */
 	public void insertRoom(Room room) {
-		
+		// TODO
+		awesomeDatabase.createQuery("insert into app.room () values ()");
 	}
 }
