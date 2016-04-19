@@ -17,6 +17,8 @@ import com.smokeyhotel.room.RoomState;
 
 public class Hotel {
 	
+	public static int amountOfRooms;
+	public static String hotelName;
 	/**
 	 * Example of how a Registration is made.
 	 */

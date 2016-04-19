@@ -54,6 +54,7 @@ public class Manager {
 				}
 				command.setInputs(inputs);
 				command.onExecute();
+				
 			}
 		}
 	}

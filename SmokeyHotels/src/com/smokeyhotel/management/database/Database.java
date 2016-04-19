@@ -48,6 +48,13 @@ public class Database {
 		// TODO
 		awesomeDatabase.createQuery("insert into app.reservation () values ()");
 	}
+	
+	/**
+	 * Returns awesomeDatabase
+	 */
+	public AwesomeDatabase getAwesomeDatabase() {
+		return this.awesomeDatabase;
+	}
 	/**
 	 * Add a guest
 	 * @param guest
