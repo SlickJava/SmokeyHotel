@@ -1,6 +1,6 @@
 package com.smokeyhotel.people.guest;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 import com.smokeyhotel.people.Person;
 
@@ -23,9 +23,9 @@ public class Guest extends Person{
 	 * @param phone 
 	 * @param creditCardNumber
 	 */
-	public Guest(int age, String name, String address, String suburb,
+	public Guest(LocalDate dob, String name, String address,
 			String phone, String creditCardNumber) {
-		super(age, name, address, suburb, phone);
+		super(dob, name, address, phone);
 		this.creditCardNumber = creditCardNumber;
 	}
 	

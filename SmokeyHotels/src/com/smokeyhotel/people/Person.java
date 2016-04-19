@@ -1,5 +1,7 @@
 package com.smokeyhotel.people;
 
+import java.time.LocalDate;
+
 /**
  * Person Base Class.
  * @author SlickJava & InsaneAboutTNT
@@ -7,27 +9,25 @@ package com.smokeyhotel.people;
 
 public class Person {
 	
-	private int age;
+	private LocalDate dob;
 	private String name;
 	private String address;
-	private String suburb;
 	private String phone;
 	
-	public Person(int age, String name, String address, String suburb, String phone)
+	public Person(LocalDate dob, String name, String address,String phone)
 	{
-		this.age = age;
+		this.dob = dob;
 		this.name = name;
 		this.address = address;
-		this.suburb = suburb;
 		this.phone = phone;
 	}
 
-	public int getAge() {
-		return age;
+	public LocalDate getDob() {
+		return dob;
 	}
 
-	public void setAge(int age) {
-		this.age = age;
+	public void setDob(LocalDate dob) {
+		this.dob = dob;
 	}
 
 	public String getName() {
@@ -46,13 +46,6 @@ public class Person {
 		this.address = address;
 	}
 
-	public String getSuburb() {
-		return suburb;
-	}
-
-	public void setSuburb(String suburb) {
-		this.suburb = suburb;
-	}
 
 	public String getPhone() {
 		return phone;

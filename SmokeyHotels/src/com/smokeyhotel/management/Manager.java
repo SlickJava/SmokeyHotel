@@ -34,6 +34,12 @@ public class Manager {
 		return message;
 	}
 	
+	/**
+	 * Initiates the command. Runs through all commands, finds the matching message, 
+	 * splits the string to find the parameters, then executes the command accordingly.
+	 * 
+	 * @param message
+	 **/
 	public void initiateCommand(String message)
 	{
 		String[] split = message.split(" ");		
@@ -48,7 +54,6 @@ public class Manager {
 				}
 				command.setInputs(inputs);
 				command.onExecute();
-				
 			}
 		}
 	}

@@ -65,7 +65,7 @@ public class ReservationManager {
 		for(Guest guest : this.guests)
 		{
 			System.out.println("Name: " + guest.getName()
-					+ " | Age: " + guest.getAge()
+					+ " | Age: " + guest.getDob()
 					+ " | Phone: " + guest.getPhone()
 					+ " | Credit Card Number: " + guest.getCreditCardNumber());
 		}

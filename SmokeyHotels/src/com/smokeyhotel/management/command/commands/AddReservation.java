@@ -19,9 +19,5 @@ public class AddReservation extends Command{
 	public void allocateRooms() {
 		
 	}
-	
-
-	
-
 
 }
