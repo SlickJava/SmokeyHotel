@@ -9,9 +9,9 @@ import com.smokeyhotel.room.Room;
 
 public class ReservationManager {
 	
-	public ArrayList<Reservation> reservations = new ArrayList<Reservation>();
-	public ArrayList<Guest> guests = new ArrayList<Guest>();
-	public ArrayList<Room> rooms = new ArrayList<Room>();
+	public static ArrayList<Reservation> reservations = new ArrayList<Reservation>();
+	public static ArrayList<Guest> guests = new ArrayList<Guest>();
+	public static ArrayList<Room> rooms = new ArrayList<Room>();
 	
 	public void createReservation(Reservation reservation, Database database)
 	{
@@ -87,5 +87,17 @@ public class ReservationManager {
 		return this.rooms;
 	}
 
+    public static Guest getGuestbyName(final String name)
+    {
+        for (final Guest guest : guests)
+        {
+            if (guest.getName() == name || guest.getName().equalsIgnoreCase(name))
+            {
+                return guest;
+            }
+        }
+
+        return null;
+    }
 
 }

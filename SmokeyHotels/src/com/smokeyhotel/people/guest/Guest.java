@@ -12,6 +12,7 @@ import com.smokeyhotel.people.Person;
 public class Guest extends Person{
 	
 	private String creditCardNumber;
+	private long ID;
 	
 	/**
 	 * Constructor:
@@ -24,9 +25,10 @@ public class Guest extends Person{
 	 * @param creditCardNumber
 	 */
 	public Guest(LocalDate dob, String name, String address,
-			String phone, String creditCardNumber) {
+			String phone, String creditCardNumber, long ID) {
 		super(dob, name, address, phone);
 		this.creditCardNumber = creditCardNumber;
+		this.ID = ID;
 	}
 	
 	public String getCreditCardNumber()
@@ -37,6 +39,16 @@ public class Guest extends Person{
 	public void setCreditCardNumber(String number)
 	{
 		this.creditCardNumber = number;
+	}
+	
+	public long getID()
+	{
+		return this.ID;
+	}
+	
+	public void setID(long ID)
+	{
+		this.ID = ID;
 	}
 	
 

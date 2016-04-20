@@ -8,13 +8,22 @@ public abstract class Command {
 	private String commandName;
 	private String[] parameters;
 	protected String[] inputs;
-	public Database database;
+	private String description;
 	
-	public Command(String commandName, String message, String[] parameters, Database database)
+	public Command(String commandName, String message, String[] parameters, String description)
 	{
 		this.message = message;
 		this.commandName = commandName;
 		this.parameters = parameters;
+		this.description = description;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public String[] getParameters()

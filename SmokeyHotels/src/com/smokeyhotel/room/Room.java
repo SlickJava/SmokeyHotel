@@ -14,6 +14,7 @@ public class Room {
 	private double price;
 	private RoomState roomState;
 	private Guest[] occupants;
+	private long ID;
 	
 	/**
 	 * Constructor:
@@ -25,13 +26,22 @@ public class Room {
 	 * @param occupants - array of Guest[] objects occupying the room
 	 */
 
-	public Room(int number, boolean vacant, RoomState roomState, double price, Guest[] occupants)
+	public Room(int number, boolean vacant, RoomState roomState, double price, Guest[] occupants, long ID)
 	{
 		this.number = number;
 		this.vacant = vacant;
 		this.price = price;
 		this.occupants = occupants;
 		this.roomState = roomState;
+		this.ID = ID;
+	}
+
+	public long getID() {
+		return ID;
+	}
+
+	public void setID(long iD) {
+		ID = iD;
 	}
 
 	public int getNumber() {
