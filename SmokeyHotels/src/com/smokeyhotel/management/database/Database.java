@@ -45,8 +45,11 @@ public class Database {
 	 * @param reservation
 	 */
 	public void insertReservation(Reservation reservation) {
-		// TODO
-		awesomeDatabase.createQuery("insert into app.reservation () values ()");
+		// TODO do later
+		awesomeDatabase.createQuery("insert into reservation () values ()");
+		awesomeDatabase.createQuery("insert into guest_reservation values"
+				+ "((select id from reservation where name=?,"
+				+ "(select ))");
 	}
 	
 	/**
@@ -55,13 +58,18 @@ public class Database {
 	public AwesomeDatabase getAwesomeDatabase() {
 		return this.awesomeDatabase;
 	}
+	/*
+	 * Do not use yet (unless you want to ruin the database
+	 * and your own life.)
+	 * */
 	/**
 	 * Add a guest
 	 * @param guest
 	 */
 	public void insertGuest(Guest guest) {
 		// TODO
-		awesomeDatabase.createQuery("insert into app.guests () values ()");
+		awesomeDatabase.createQuery("insert into guest (name, dob, ...) values (?, ?)")
+		    .params(guest.getName(), guest.getDob());
 	}
 	/**
 	 * Add a room
@@ -69,6 +77,6 @@ public class Database {
 	 */
 	public void insertRoom(Room room) {
 		// TODO
-		awesomeDatabase.createQuery("insert into app.room () values ()");
+		awesomeDatabase.createQuery("insert into room (number) values (?)").params(room.getNumber());
 	}
 }
