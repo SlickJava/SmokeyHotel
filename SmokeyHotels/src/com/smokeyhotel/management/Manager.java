@@ -1,7 +1,6 @@
 package com.smokeyhotel.management;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -11,11 +10,12 @@ import com.smokeyhotel.management.command.commands.Help;
 import com.smokeyhotel.management.database.Database;
 import com.smokeyhotel.management.reservation.ReservationManager;
 import com.smokeyhotel.people.guest.Guest;
+import com.smokeyhotel.room.Room;
+import com.smokeyhotel.room.RoomState;
 
 public class Manager {
 	
 	public static ArrayList<Command> commands = new ArrayList<Command>();
-	private ReservationManager reservationManager;
 	private Database database;
 	private Scanner scanner;
 	
@@ -23,10 +23,6 @@ public class Manager {
 	{
 		scanner = new Scanner(System.in);
 		database = new Database();
-		reservationManager = new ReservationManager();
-		//Next two lines are for teseting
-		ReservationManager.guests.add(new Guest(LocalDate.now(), "Bob", "somewhereovertherainbow", "0211824701", "1515124152315123123", 123L));
-		ReservationManager.guests.add(new Guest(LocalDate.now(), "Chode", "somewhereovertherainbow", "0211824701", "1515124152315123123", 1234L));
 		this.addCommands();
 	}
 	
@@ -51,13 +47,14 @@ public class Manager {
 	public void initiateCommand(String message)
 	{
 		String[] split = message.split(" ");
+		
 		if(!commands.contains(getCommandbyMessage(split[0]))) {
 				System.out.println("Unkown command: " + split[0]);
 				return;
 		}
+		
 		for(Command command : commands)
 		{
-			
 			if(command.getMessage().equals(split[0]))
 			{
 				String[] inputs = new String[command.getParameters().length];
@@ -67,9 +64,7 @@ public class Manager {
 				}
 				command.setInputs(inputs);
 				command.onExecute();
-				
 			}
-			
 		}
 	}
 	

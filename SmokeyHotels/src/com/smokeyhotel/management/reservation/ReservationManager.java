@@ -12,25 +12,71 @@ public class ReservationManager {
 	public static ArrayList<Reservation> reservations = new ArrayList<Reservation>();
 	public static ArrayList<Guest> guests = new ArrayList<Guest>();
 	public static ArrayList<Room> rooms = new ArrayList<Room>();
+	public static ArrayList<Room> resRooms = new ArrayList<Room>();
 	
-	public void createReservation(Reservation reservation, Database database)
+	public static void createReservation(Reservation reservation, Database database)
 	{
-		this.reservations.add(reservation);
-		database.insertReservation(reservation);
-		this.addRooms(reservation.getRooms(), database);
-		this.addGuests(database);
+		reservations.add(reservation);
+		//TODO uncomment the 3 statements below after db is finished
+		//database.insertReservation(reservation);
+		//updateRooms(database);
+		//addGuests(database);
+		System.out.println("Reservation " + reservation.getId() + " created. Includes " 
+				+ reservation.getOccupants().length + " guests and " 
+				+ reservation.getRooms().length + " rooms. "
+				+ "Master of this reservation is " + reservation.getMaster().getName());
 	}
 	
 	/*
 	 * Delete Reservation, returns false if reservation is not in the reservations ArrayList
 	 */
-	public boolean deleteReservation(Reservation reservation)
+	public static boolean deleteReservation(Reservation reservation)
 	{
 		for(Reservation res : reservations)
 		{
 			if(res.equals(reservation))
 			{
+				for(Room room : rooms)
+				{
+					ArrayList<Guest> roomOcc = new ArrayList<Guest>();
+					ArrayList<Guest> resOcc = new ArrayList<Guest>();
+					Guest[] roomOccupants = room.getOccupants();
+					Guest[] resOccupants = res.getOccupants();
+					
+					for(int i = 0; i < room.getOccupants().length; i++)
+					{
+						roomOcc.add(roomOccupants[i]);
+					}
+					
+					for(int i = 0; i < res.getOccupants().length; i++)
+					{
+						resOcc.add(resOccupants[i]);
+					}
+					
+					for(Guest occ : resOcc)
+					{
+						if(roomOcc.contains(occ))
+						{
+							room.setOccupants(null);
+							room.setVacant(true);
+						}
+					}
+					//TODO Insert remove occupants here
+				}
+				
+				for(Guest guest : guests)
+				{
+					Guest[] occupants = res.getOccupants();
+					for(int i = 0; i < res.getOccupants().length; i++)
+					{
+						if(guests.contains(occupants[i]))
+						{
+							guests.remove(occupants[i]);
+						}
+					}
+				}
 				reservations.remove(reservation);
+				
 			}else
 			{
 				return false;
@@ -39,30 +85,34 @@ public class ReservationManager {
 		return true;
 	}
 	
-	public void addGuests(Database database)
+	public static void addGuests(Database database)
 	{
-		for(Room room : this.rooms)
+		for(Room room : rooms)
 		{
-			this.guests.addAll(Arrays.asList(room.getOccupants()));
+			guests.addAll(Arrays.asList(room.getOccupants()));
 		}
-		for(Guest guest : this.guests)
+		for(Guest guest : guests)
 		{
 			database.insertGuest(guest);
 		}
 	}
 	
-	public void addRooms(Room[] room, Database database)
+	public static void updateRooms(Database database)
 	{
-		rooms.addAll(Arrays.asList(room));
-		for(Room r00m : this.rooms)
+		for(Room r00m : rooms)
 		{
 			database.insertRoom(r00m);
 		}
 	}
 	
-	public void printGuests()
+	public static void addResRooms(Room[] room, Database database)
 	{
-		for(Guest guest : this.guests)
+		resRooms.addAll(Arrays.asList(room));
+	}
+	
+	public static void printGuests()
+	{
+		for(Guest guest : guests)
 		{
 			System.out.println("Name: " + guest.getName()
 					+ " | Age: " + guest.getDob()
@@ -72,19 +122,19 @@ public class ReservationManager {
 
 	}
 	
-	public ArrayList<Reservation> getReservations()
+	public static ArrayList<Reservation> getReservations()
 	{
-		return this.reservations;
+		return reservations;
 	}
 	
-	public ArrayList<Guest> getGuests()
+	public static ArrayList<Guest> getGuests()
 	{
-		return this.guests;
+		return guests;
 	}
 	
-	public ArrayList<Room> getRooms()
+	public static ArrayList<Room> getRooms()
 	{
-		return this.rooms;
+		return rooms;
 	}
 
     public static Guest getGuestbyName(final String name)

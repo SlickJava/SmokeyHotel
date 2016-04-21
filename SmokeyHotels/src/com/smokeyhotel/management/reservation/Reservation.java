@@ -52,7 +52,7 @@ public class Reservation {
 			}
 		}
 		// Convert to array
-		return (Guest[]) guests.toArray();
+		return (Guest[]) guests.toArray(new Guest[guests.size()]);
 	}
 	
 	public Guest getMaster() {
