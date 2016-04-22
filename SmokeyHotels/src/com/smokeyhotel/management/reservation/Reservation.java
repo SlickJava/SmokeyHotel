@@ -10,18 +10,18 @@ public class Reservation {
 	
 	private Guest master;
 	private Room rooms[];
-	private long id;
+	private long code;
 	
-	public Reservation(long id,Guest master, Room rooms[])
+	public Reservation(long code,Guest master, Room rooms[])
 	{
 		this.master = master;
 		this.rooms = rooms;
-		this.id = id;
+		this.code = code;
 	}
 
-	public long getID()
+	public long getCode()
 	{
-		return this.id;
+		return this.code;
 	}
 	
 	public Room[] getRooms()
@@ -49,7 +49,7 @@ public class Reservation {
 			//TEST STATEMENT BELOWd
 			if(roomGuests == null)
 				return null;
-			System.out.println(roomGuests.length + " get occupants " + this.getID());
+			System.out.println(roomGuests.length + " get occupants " + this.getCode());
 			for(int j = 0; j < roomGuests.length; j++)
 			{
 				guests.add(roomGuests[j]);

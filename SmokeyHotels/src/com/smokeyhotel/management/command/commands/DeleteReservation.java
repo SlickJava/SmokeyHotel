@@ -20,9 +20,9 @@ public class DeleteReservation extends Command{
 		{
 			if(ReservationManager.deleteReservation(res))
 			{
-				System.out.println("Reservation " + res.getID() + " succesfully removed");
+				System.out.println("Reservation " + res.getCode() + " succesfully removed");
 			}else{
-				System.out.println("Reservation " + res.getID() + " is not valid.");
+				System.out.println("Reservation " + res.getCode() + " is not valid.");
 			}
 		}else
 		{
@@ -38,7 +38,7 @@ public class DeleteReservation extends Command{
 		for(Reservation res : ReservationManager.reservations)
 		{
 			System.out.println(ReservationManager.reservations.size());
-			if(res.getID() == Long.parseLong(mes))
+			if(res.getCode() == Long.parseLong(mes))
 			{
 				System.out.println(res.getOccupants().length + " get occupants length full reservation");
 				reservation = res;

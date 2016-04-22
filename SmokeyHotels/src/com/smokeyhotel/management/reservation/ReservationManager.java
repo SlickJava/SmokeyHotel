@@ -21,7 +21,7 @@ public class ReservationManager {
 		//database.insertReservation(reservation);
 		//updateRooms(database);
 		//addGuests(database);
-		System.out.println("Reservation " + reservation.getID() + " created. Includes " 
+		System.out.println("Reservation " + reservation.getCode() + " created. Includes " 
 				+ reservation.getOccupants().length + " guests and " 
 				+ reservation.getRooms().length + " rooms. "
 				+ "Master of this reservation is " + reservation.getMaster().getName());

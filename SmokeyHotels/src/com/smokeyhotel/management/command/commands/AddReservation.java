@@ -91,7 +91,7 @@ public class AddReservation extends Command{
 			 generateID = LOWER_RANGE + 
                      (long)(random.nextDouble()*(UPPER_RANGE - LOWER_RANGE));
 			 
-			if(res.getID()	== generateID)
+			if(res.getCode()	== generateID)
 			{
 				 generateID = LOWER_RANGE + 
 				                           (long)(random.nextDouble()*(UPPER_RANGE - LOWER_RANGE));
