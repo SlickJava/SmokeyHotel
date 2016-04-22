@@ -10,7 +10,6 @@ import com.smokeyhotel.management.reservation.Reservation;
 import com.smokeyhotel.management.reservation.ReservationManager;
 import com.smokeyhotel.people.guest.Guest;
 import com.smokeyhotel.room.Room;
-import com.smokeyhotel.room.RoomState;
 
 /**
  * Main Hotel.java class. Initiation happens here.
@@ -27,12 +26,12 @@ public class Hotel {
 	public static void main(String args[])
 	{
 		//Next few lines are for teseting
-		ReservationManager.rooms.add(new Room(1,2,true,RoomState.MADE, 20,null,1));
-		ReservationManager.rooms.add(new Room(2,1,true,RoomState.MADE, 20,null,2));
-		ReservationManager.rooms.add(new Room(3,1,true,RoomState.MADE, 20,null,3));
-		ReservationManager.rooms.add(new Room(4,1,true,RoomState.MADE, 20,null,4));
-		ReservationManager.rooms.add(new Room(5,1,true,RoomState.MADE, 20,null,5));
-		ReservationManager.rooms.add(new Room(6,1,true,RoomState.MADE, 20,null,6));
+		ReservationManager.rooms.add(new Room(1,2,true, 20,null,1));
+		ReservationManager.rooms.add(new Room(2,1,true, 20,null,2));
+		ReservationManager.rooms.add(new Room(3,1,true, 20,null,3));
+		ReservationManager.rooms.add(new Room(4,1,true, 20,null,4));
+		ReservationManager.rooms.add(new Room(5,1,true, 20,null,5));
+		ReservationManager.rooms.add(new Room(6,1,true, 20,null,6));
 		
 
 		

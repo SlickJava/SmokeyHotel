@@ -12,7 +12,6 @@ public class Room {
 	private int number;
 	private boolean vacant;
 	private double price;
-	private RoomState roomState;
 	private Guest[] occupants;
 	private long ID;
 	private int maxNumberOfOccupants;
@@ -27,13 +26,12 @@ public class Room {
 	 * @param occupants - array of Guest[] objects occupying the room
 	 */
 
-	public Room(int roomNumber, int maxNumberOfOccupants,boolean vacant, RoomState roomState, double price, Guest[] occupants, long ID)
+	public Room(int roomNumber, int maxNumberOfOccupants,boolean vacant,  double price, Guest[] occupants, long ID)
 	{
 		this.number = roomNumber;
 		this.vacant = vacant;
 		this.price = price;
 		this.occupants = occupants;
-		this.roomState = roomState;
 		this.ID = ID;
 		this.maxNumberOfOccupants = maxNumberOfOccupants;
 	}
@@ -52,16 +50,6 @@ public class Room {
 
 	public int getNumber() {
 		return number;
-	}
-	
-	public void setRoomState(RoomState state)
-	{
-		this.roomState = state;
-	}
-
-	public RoomState getRoomState()
-	{
-		return roomState;
 	}
 	
 	public Guest[] getOccupants() {
