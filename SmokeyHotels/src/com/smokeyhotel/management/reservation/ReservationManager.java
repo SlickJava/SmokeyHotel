@@ -204,7 +204,8 @@ public class ReservationManager {
 			System.out.println("Name: " + guest.getName()
 					+ " | Age: " + guest.getDob()
 					+ " | Phone: " + guest.getPhone()
-					+ " | Credit Card Number: " + guest.getCreditCardNumber());
+					+ " | Credit Card Number: " + guest.getCreditCardNumber()
+					+ " | ID: " + guest.getID());
 		}
 
 	}
