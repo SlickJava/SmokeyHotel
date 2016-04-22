@@ -30,7 +30,7 @@ public class Manager {
 	public void addCommands()
 	{
 		commands.add(new AddReservation(database));
-		commands.add(new DeleteReservation());
+		commands.add(new DeleteReservation(database));
 		commands.add(new Help());
 	}
 	

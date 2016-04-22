@@ -2,6 +2,7 @@ package com.smokeyhotel.management.reservation;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 
 import com.smokeyhotel.management.database.Database;
 import com.smokeyhotel.people.guest.Guest;
@@ -30,19 +31,22 @@ public class ReservationManager {
 	/*
 	 * Delete Reservation, returns false if reservation is not in the reservations ArrayList
 	 */
-	public static boolean deleteReservation(Reservation reservation)
+	public static boolean deleteReservation(Reservation reservation, Database database)
 	{
-		for(Reservation res : reservations)
+		Iterator<Reservation> reser = reservations.iterator();
+		while(reser.hasNext())
 		{
+			Reservation res = reser.next();
 			if(res.equals(reservation))
 			{
-				if(res.getOccupants() == null)
-				{
-					continue;
-				}
 				
 				for(Room room : rooms)
 				{
+					if(res.getOccupants() == null)
+					{
+						continue;
+					}
+					
 					ArrayList<Guest> roomOcc = new ArrayList<Guest>();
 					ArrayList<Guest> resOcc = new ArrayList<Guest>();
 					Guest[] roomOccupants = room.getOccupants();
@@ -71,6 +75,11 @@ public class ReservationManager {
 				
 				for(Guest guest : guests)
 				{
+					if(res.getOccupants() == null)
+					{
+						continue;
+					}
+					
 					Guest[] occupants = res.getOccupants();
 					for(int i = 0; i < res.getOccupants().length; i++)
 					{
@@ -80,13 +89,86 @@ public class ReservationManager {
 						}
 					}
 				}
-				reservations.remove(reservation);
+				
+				reser.remove();
+				//database.deleteReservation(res);
+				
 				
 			}else
 			{
 				return false;
 			}
 		}
+		
+		/*
+		for(Reservation res : reservations)
+		{
+			if(res.equals(reservation))
+			{
+				
+				for(Room room : rooms)
+				{
+					if(res.getOccupants() == null)
+					{
+						continue;
+					}
+					
+					ArrayList<Guest> roomOcc = new ArrayList<Guest>();
+					ArrayList<Guest> resOcc = new ArrayList<Guest>();
+					Guest[] roomOccupants = room.getOccupants();
+					Guest[] resOccupants = res.getOccupants();
+					
+					for(int i = 0; i < room.getOccupants().length; i++)
+					{
+						roomOcc.add(roomOccupants[i]);
+					}
+					
+					for(int i = 0; i < res.getOccupants().length; i++)
+					{
+						resOcc.add(resOccupants[i]);
+					}
+					
+					for(Guest occ : resOcc)
+					{
+						if(roomOcc.contains(occ))
+						{
+							room.setOccupants(null);
+							room.setVacant(true);
+						}
+					}
+					//TODO Insert remove occupants here
+				}
+				
+				for(Guest guest : guests)
+				{
+					if(res.getOccupants() == null)
+					{
+						continue;
+					}
+					
+					Guest[] occupants = res.getOccupants();
+					for(int i = 0; i < res.getOccupants().length; i++)
+					{
+						if(guests.contains(occupants[i]))
+						{
+							guests.remove(occupants[i]);
+						}
+					}
+				}
+				
+				tempRes.remove(res);
+				continue;
+				//database.deleteReservation(res);
+				
+				
+			}else
+			{
+				return false;
+			}
+		}*/
+		
+		//reservations = database.getReservations();
+		//System.out.println(reservations.size());
 		return true;
 	}
 	

@@ -49,7 +49,6 @@ public class Reservation {
 			//TEST STATEMENT BELOWd
 			if(roomGuests == null)
 				return null;
-			System.out.println(roomGuests.length + " get occupants " + this.getCode());
 			for(int j = 0; j < roomGuests.length; j++)
 			{
 				guests.add(roomGuests[j]);

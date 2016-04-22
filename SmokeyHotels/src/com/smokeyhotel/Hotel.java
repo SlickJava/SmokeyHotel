@@ -34,6 +34,8 @@ public class Hotel {
 		ReservationManager.rooms.add(new Room(5,1,true,RoomState.MADE, 20,null,5));
 		ReservationManager.rooms.add(new Room(6,1,true,RoomState.MADE, 20,null,6));
 		ReservationManager.guests.add(new Guest(LocalDate.now(), "Bob", "somewhereovertherainbow", 0211231234L, 9999999999999999L, LocalDate.now(), "ChickenMan", 375, 1L));
+		ReservationManager.guests.add(new Guest(LocalDate.now(), "Chode", "somewhereovertherainbow", 0211231234L, 9999999999999999L, LocalDate.now(), "ChickenMan", 375, 2L));
+		ReservationManager.guests.add(new Guest(LocalDate.now(), "Fat", "somewhereovertherainbow", 0211231234L, 9999999999999999L, LocalDate.now(), "ChickenMan", 375, 3L));
 
 		
 		Manager manager = new Manager();
