@@ -39,7 +39,7 @@ public class Database {
 						.atZone(ZoneId.systemDefault()).toLocalDate(),
 						resultSet.getString("name"),
 						resultSet.getString("address"),
-						resultSet.getLong("phoneNumber"),
+						resultSet.getString("phoneNumber"),
 						resultSet.getLong("creditCardNumber"),
 						resultSet.getDate("expiryDate").toInstant()
 						.atZone(ZoneId.systemDefault()).toLocalDate(),
