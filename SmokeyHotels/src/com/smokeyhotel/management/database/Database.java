@@ -110,6 +110,9 @@ public class Database {
 		// TODO
 		return null;
 	}
+	public Reservation getReservation() {
+		return null;
+	}
 	public void deleteReservation(Reservation reservation) {
 		
 	}
