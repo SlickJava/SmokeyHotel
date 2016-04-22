@@ -3,6 +3,7 @@ package com.smokeyhotel.management.database;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Properties;
 
 import com.awesome.db.AwesomeDatabase;
@@ -18,7 +19,7 @@ import com.smokeyhotel.room.Room;
  * deleting data in the hotel database.
  */
 public class Database {
-	AwesomeDatabase awesomeDatabase;
+	private AwesomeDatabase awesomeDatabase;
 	/**
 	 * Initiate a data source and
 	 * make a new AwesomeDatabase to use
@@ -40,16 +41,39 @@ public class Database {
 			e.printStackTrace();
 		}
 	}
+
+	/*
+	 * DO NOT USE YET!!! (unless you want to ruin the database
+	 * and your own life.)
+	 * (TODO complete this stuff)
+	 * */
 	/**
 	 * Add a reservation
 	 * @param reservation
 	 */
 	public void insertReservation(Reservation reservation) {
 		// TODO do later
-		awesomeDatabase.createQuery("insert into reservation () values ()");
-		awesomeDatabase.createQuery("insert into guest_reservation values"
-				+ "((select id from reservation where name=?,"
-				+ "(select ))");
+		// Maybe do: if exists (insert into guest values( ... ))
+		// RESERVATION table.
+		awesomeDatabase.createQuery("insert into reservation"
+				+ "(reservation_code, master_guest_id) values "
+				+ "(?,"
+				+ "select id from guest where name=?)")
+			.params(reservation.getCode(), reservation.getMaster().getName());
+		// Insert into JUNCTION TABLE
+		// Note: maybe change Reservation.id to Reservation.reservationCode
+		awesomeDatabase.createQuery("insert into guest_reservation"
+				+ "(reservation_id, guest_id) values"
+				+ "((select id from reservation where reservation_code=?,"
+				+ "(select id from guest where name=?))")
+			// Lambdas FTW!!
+			.setStatement(statement -> {
+				for (Guest guest: reservation.getOccupants()) {
+					// Change to reservationCode?
+					statement.setLong(1, reservation.getCode());
+					statement.setString(2, guest.getName());
+				}
+			});
 	}
 	
 	/**
@@ -58,18 +82,20 @@ public class Database {
 	public AwesomeDatabase getAwesomeDatabase() {
 		return this.awesomeDatabase;
 	}
-	/*
-	 * Do not use yet (unless you want to ruin the database
-	 * and your own life.)
-	 * */
 	/**
 	 * Add a guest
 	 * @param guest
 	 */
 	public void insertGuest(Guest guest) {
 		// TODO
-		awesomeDatabase.createQuery("insert into guest (name, dob, ...) values (?, ?)")
-		    .params(guest.getName(), guest.getDob());
+		awesomeDatabase.createQuery("insert into guest"
+				+ " (dob, name, address, phone, creditCardNumber,"
+				+ " expiryDate, creditCardName, creditCardSecurity)"
+				+ " values (?, ?)")
+			// could've use params(), but imo this looks better
+		    .setStatement(statement -> {
+		    	statement.setString(1, guest.getName());
+		    });
 	}
 	/**
 	 * Add a room
@@ -77,6 +103,14 @@ public class Database {
 	 */
 	public void insertRoom(Room room) {
 		// TODO
-		awesomeDatabase.createQuery("insert into room (number) values (?)").params(room.getNumber());
+		awesomeDatabase.createQuery("insert into room (number) values (?)")
+			.params(room.getNumber());
+	}
+	public ArrayList<Guest> getAllGuests() {
+		// TODO
+		return null;
+	}
+	public void deleteReservation(Reservation reservation) {
+		
 	}
 }
