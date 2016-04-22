@@ -2,12 +2,13 @@ DROP TABLE IF EXISTS guest_occupancy;
 DROP TABLE IF EXISTS occupancy;
 DROP TABLE IF EXISTS guest_reservation;
 DROP TABLE IF EXISTS reservation;
+DROP TABLE IF EXISTS reservation_room;
 DROP TABLE IF EXISTS room_history;
 DROP TABLE IF EXISTS room;
 DROP TABLE IF EXISTS room_type;
 DROP TABLE IF EXISTS room_status;
 DROP TABLE IF EXISTS guest;
-
+-- Add data finding if reservation is occupying room.
 
 CREATE TABLE guest
 (
@@ -19,7 +20,8 @@ CREATE TABLE guest
     creditCardNumber CHAR(16) NOT NULL,
     expiryDate DATE NOT NULL,
     creditCardName VARCHAR(255) NOT NULL,
-    creditCardSecurity INT NOT NULL
+    creditCardSecurity INT NOT NULL,
+    guestUniqueId int NOT NULL
 );
 
 
@@ -43,8 +45,11 @@ CREATE TABLE room_status
 CREATE TABLE room
 (
     id              SERIAL PRIMARY KEY,
-    name            text NOT NULL,
-    room_type_id    int NOT NULL REFERENCES room_type(id)
+    number          int NOT NULL,
+    room_type_id    int NOT NULL REFERENCES room_type(id),
+    room_status_id  int NOT NULL REFERENCES room_status(id),
+    current_reservation_id int NOT NULL REFERENCES reservation(id),
+    isOccupied BOOLEAN NOT NULL
 );
 
 
@@ -61,15 +66,10 @@ CREATE TABLE room
 CREATE TABLE reservation
 (
     id                  SERIAL PRIMARY KEY,
-    reservation_code    text NOT NULL,
+    reservationCode    text NOT NULL,
     master_guest_id int NOT NULL REFERENCES guest(id)
 --    day_start           date NOT NULL,
 --    day_end             date NOT NULL
-);
--- Junction table, a reservation can have multiple rooms.
-CREATE TABLE reservation_room (
-	room_id int NOT NULL REFERENCES room(id),
-	reservation_id int NOT NULL REFERENCES reservation(id)
 );
 
 CREATE TABLE guest_reservation
