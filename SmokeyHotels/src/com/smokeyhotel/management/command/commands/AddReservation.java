@@ -10,6 +10,7 @@ import com.smokeyhotel.management.reservation.ReservationManager;
 import com.smokeyhotel.people.guest.Guest;
 import com.smokeyhotel.room.Room;
 import com.smokeyhotel.room.RoomState;
+import com.smokeyhotel.utils.ArrayUtils;
 
 public class AddReservation extends Command{
 
@@ -73,11 +74,6 @@ public class AddReservation extends Command{
 					guests[i] = guest; 
 				}
 			}
-			if(guests[i] == null)
-			{
-				//TODO
-				//guests = ArrayUtils.removeElemnt(null,null);
-			}
 		}
 		return guests;
 	}
@@ -95,14 +91,12 @@ public class AddReservation extends Command{
 			 generateID = LOWER_RANGE + 
                      (long)(random.nextDouble()*(UPPER_RANGE - LOWER_RANGE));
 			 
-			if(res.getId()	== generateID)
+			if(res.getID()	== generateID)
 			{
 				 generateID = LOWER_RANGE + 
 				                           (long)(random.nextDouble()*(UPPER_RANGE - LOWER_RANGE));
 			}
 		}
-		System.out.println(resRooms.size());
-		//Weird error welp
 		Room[] rooms = (Room[]) resRooms.toArray(new Room[resRooms.size()]);
 		Reservation reservation = new Reservation(generateID, this.getMasterFromString(this.inputs[0]), rooms);
 		ReservationManager.createReservation(reservation, database);

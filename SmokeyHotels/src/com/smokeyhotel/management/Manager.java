@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 import com.smokeyhotel.management.command.Command;
 import com.smokeyhotel.management.command.commands.AddReservation;
+import com.smokeyhotel.management.command.commands.DeleteReservation;
 import com.smokeyhotel.management.command.commands.Help;
 import com.smokeyhotel.management.database.Database;
 import com.smokeyhotel.management.reservation.ReservationManager;
@@ -29,6 +30,7 @@ public class Manager {
 	public void addCommands()
 	{
 		commands.add(new AddReservation(database));
+		commands.add(new DeleteReservation());
 		commands.add(new Help());
 	}
 	
@@ -66,6 +68,7 @@ public class Manager {
 				command.onExecute();
 			}
 		}
+
 	}
 	
 	/**

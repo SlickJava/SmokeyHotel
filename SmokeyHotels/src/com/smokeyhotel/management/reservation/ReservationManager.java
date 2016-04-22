@@ -21,7 +21,7 @@ public class ReservationManager {
 		//database.insertReservation(reservation);
 		//updateRooms(database);
 		//addGuests(database);
-		System.out.println("Reservation " + reservation.getId() + " created. Includes " 
+		System.out.println("Reservation " + reservation.getID() + " created. Includes " 
 				+ reservation.getOccupants().length + " guests and " 
 				+ reservation.getRooms().length + " rooms. "
 				+ "Master of this reservation is " + reservation.getMaster().getName());
@@ -36,6 +36,11 @@ public class ReservationManager {
 		{
 			if(res.equals(reservation))
 			{
+				if(res.getOccupants() == null)
+				{
+					continue;
+				}
+				
 				for(Room room : rooms)
 				{
 					ArrayList<Guest> roomOcc = new ArrayList<Guest>();

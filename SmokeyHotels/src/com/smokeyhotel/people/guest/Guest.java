@@ -11,7 +11,10 @@ import com.smokeyhotel.people.Person;
 
 public class Guest extends Person{
 	
-	private String creditCardNumber;
+	private long creditCardNumber;
+	private LocalDate expiryDate;
+	private String creditCardName;
+	private int creditCardSecurity;
 	private long ID;
 	
 	/**
@@ -25,18 +28,46 @@ public class Guest extends Person{
 	 * @param creditCardNumber
 	 */
 	public Guest(LocalDate dob, String name, String address,
-			String phone, String creditCardNumber, long ID) {
+			long phone, long creditCardNumber, LocalDate expiryDate, String creditCardName, int creditCardSecurity, long ID) {
 		super(dob, name, address, phone);
 		this.creditCardNumber = creditCardNumber;
+		this.expiryDate = expiryDate;
+		this.creditCardName = creditCardName;
+		this.creditCardSecurity = creditCardSecurity;
 		this.ID = ID;
 	}
 	
-	public String getCreditCardNumber()
+	
+	public LocalDate getExpiryDate() {
+		return expiryDate;
+	}
+
+	public void setExpiryDate(LocalDate expiryDate) {
+		this.expiryDate = expiryDate;
+	}
+
+	public String getCreditCardName() {
+		return creditCardName;
+	}
+
+	public void setCreditCardName(String creditCardName) {
+		this.creditCardName = creditCardName;
+	}
+
+	public int getCreditCardSecurity() {
+		return creditCardSecurity;
+	}
+
+	public void setCreditCardSecurity(int creditCardSecurity) {
+		this.creditCardSecurity = creditCardSecurity;
+	}
+
+	public long getCreditCardNumber()
 	{
 		return this.creditCardNumber;
 	}
 	
-	public void setCreditCardNumber(String number)
+	public void setCreditCardNumber(long number)
 	{
 		this.creditCardNumber = number;
 	}

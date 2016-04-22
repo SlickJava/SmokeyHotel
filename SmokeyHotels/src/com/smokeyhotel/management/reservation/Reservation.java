@@ -19,7 +19,7 @@ public class Reservation {
 		this.id = id;
 	}
 
-	public long getId()
+	public long getID()
 	{
 		return this.id;
 	}
@@ -46,7 +46,11 @@ public class Reservation {
 		for(int i = 0; i < rooms.length; i++)
 		{
 			Guest[] roomGuests = rooms[i].getOccupants();
-			for(int j = 0; j < rooms[i].getOccupants().length; j++)
+			//TEST STATEMENT BELOWd
+			if(roomGuests == null)
+				return null;
+			System.out.println(roomGuests.length + " get occupants " + this.getID());
+			for(int j = 0; j < roomGuests.length; j++)
 			{
 				guests.add(roomGuests[j]);
 			}

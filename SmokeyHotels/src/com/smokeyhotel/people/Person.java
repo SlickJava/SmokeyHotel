@@ -12,9 +12,9 @@ public class Person {
 	private LocalDate dob;
 	private String name;
 	private String address;
-	private String phone;
+	private long phone;
 	
-	public Person(LocalDate dob, String name, String address,String phone)
+	public Person(LocalDate dob, String name, String address,long phone)
 	{
 		this.dob = dob;
 		this.name = name;
@@ -47,11 +47,11 @@ public class Person {
 	}
 
 
-	public String getPhone() {
+	public long getPhone() {
 		return phone;
 	}
 
-	public void setPhone(String phone) {
+	public void setPhone(long phone) {
 		this.phone = phone;
 	}
 	
