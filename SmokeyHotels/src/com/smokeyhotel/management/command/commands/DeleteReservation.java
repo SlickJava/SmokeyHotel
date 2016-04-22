@@ -10,7 +10,7 @@ public class DeleteReservation extends Command{
 	private Database database;
 	
 	public DeleteReservation(Database database) {
-		super("Delete Reservation", "deletereservation", new String[] {"reservation"}, "Deletes a reservation");
+		super("Delete Reservation", "deletereservation", new String[] {"reservation"}, "Deletes a reservation.");
 		this.database = database;
 		// TODO Auto-generated constructor stub
 	}

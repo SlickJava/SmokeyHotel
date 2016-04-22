@@ -1,18 +1,14 @@
 package com.smokeyhotel.management;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.smokeyhotel.management.command.Command;
+import com.smokeyhotel.management.command.commands.AddGuest;
 import com.smokeyhotel.management.command.commands.AddReservation;
 import com.smokeyhotel.management.command.commands.DeleteReservation;
 import com.smokeyhotel.management.command.commands.Help;
 import com.smokeyhotel.management.database.Database;
-import com.smokeyhotel.management.reservation.ReservationManager;
-import com.smokeyhotel.people.guest.Guest;
-import com.smokeyhotel.room.Room;
-import com.smokeyhotel.room.RoomState;
 
 public class Manager {
 	
@@ -31,6 +27,7 @@ public class Manager {
 	{
 		commands.add(new AddReservation(database));
 		commands.add(new DeleteReservation(database));
+		commands.add(new AddGuest());
 		commands.add(new Help());
 	}
 	
