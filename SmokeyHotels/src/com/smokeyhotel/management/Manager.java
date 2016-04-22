@@ -59,6 +59,10 @@ public class Manager {
 			if(command.getMessage().equals(split[0]))
 			{
 				String[] inputs = new String[command.getParameters().length];
+				if((split.length - 1) != command.getParameters().length) {
+					System.out.println("Error - Incorrect number of parameters entered.");
+					return;
+				}
 				for(int i = 0; i < command.getParameters().length; i++)
 				{
 					inputs[i] = split[i+1];
@@ -71,7 +75,7 @@ public class Manager {
 	}
 	
 	/**
-	 * Initiates command listener. Listeners from commands.
+	 * Initiates command listener. Listens for commands.
 	 **/
 	public void initiateCommandListener()
 	{

@@ -45,16 +45,14 @@ public class AddGuest extends Command{
 		
 		ReservationManager.guests.add(guest);
 		
-		System.out.println("Added guest " + guest.getName() + " with the ID of " + guest.getID());
-		System.out.println(ReservationManager.guests.size() + " size of guests arraylist (testing purposes)");
+		System.out.println("Added guest " + guest.getName() + " with the ID of " + guest.getID() + ".");
+		//System.out.println(ReservationManager.guests.size() + " size of guests arraylist (testing purposes)");
 		
 	}
 	
 	public LocalDate getDateOfBirth()
 	{
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MMM-dd");
-		System.out.println(this.getParameters().length);
-		System.out.println(this.inputs[1]);
 		LocalDate dt = LocalDate.parse(this.inputs[1], dtf);
 		
 		return dt;
@@ -70,9 +68,9 @@ public class AddGuest extends Command{
 		return this.inputs[2];
 	}
 	
-	public long getPhone()
+	public String getPhone()
 	{
-		return Long.parseLong(this.inputs[3]);
+		return this.inputs[3];
 	}
 	
 	public long getCreditCardNumber()

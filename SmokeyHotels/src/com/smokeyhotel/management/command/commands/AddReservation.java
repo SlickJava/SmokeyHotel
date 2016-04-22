@@ -9,7 +9,6 @@ import com.smokeyhotel.management.reservation.Reservation;
 import com.smokeyhotel.management.reservation.ReservationManager;
 import com.smokeyhotel.people.guest.Guest;
 import com.smokeyhotel.room.Room;
-import com.smokeyhotel.room.RoomState;
 import com.smokeyhotel.utils.ArrayUtils;
 
 public class AddReservation extends Command{
@@ -113,33 +112,42 @@ public class AddReservation extends Command{
 		{
 			if(room.getOccupants() == null)
 			{
-				if(room.getRoomState() == RoomState.MADE)
+				if(room.isVacant())
 				{
-					if(room.isVacant())
+					if(backIndex != -1)
 					{
-						if(backIndex != -1)
+						Guest[] occupants = new Guest[room.getMaxNumberOfOccupants()];
+						
+						for(int i = 0; i < occupants.length; i++)
 						{
-							Guest[] occupants = new Guest[room.getMaxNumberOfOccupants()];
-							
-							for(int i = 0; i < occupants.length; i++)
-							{
-								occupants[i] = guests[backIndex];
-								backIndex--;
-							}
-							
-							room.setOccupants(occupants);
-							room.setVacant(false);
-							resRooms.add(room);
-							
-							
-							for(int i = 0; i < occupants.length; i++)
-							{
-								System.out.println("Guest: " + occupants[i].getName() 
-										+ " has been allocated to room " + room.getNumber());
+							if(backIndex < 0)
+								continue;
+						
+							occupants[i] = guests[backIndex];
+							backIndex--;
+						}
+						
+						for(int i = 0; i < occupants.length; i++)
+						{
+							if(occupants[i] == null || occupants[i].equals(null)) {
+								occupants = ArrayUtils.removeNullGuest(occupants);
+								continue;
 							}
 						}
-					}	
-				}
+						
+						room.setOccupants(occupants);
+						room.setVacant(false);
+						resRooms.add(room);
+						
+						for(int i = 0; i < occupants.length; i++)
+						{
+							System.out.println("Guest: " + occupants[i].getName() 
+									+ " has been allocated to room " + room.getNumber());
+						}
+						
+					}
+				}	
+				
 			}
 		}
 

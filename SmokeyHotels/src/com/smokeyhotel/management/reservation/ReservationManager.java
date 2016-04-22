@@ -25,7 +25,7 @@ public class ReservationManager {
 		System.out.println("Reservation " + reservation.getCode() + " created. Includes " 
 				+ reservation.getOccupants().length + " guests and " 
 				+ reservation.getRooms().length + " rooms. "
-				+ "Master of this reservation is " + reservation.getMaster().getName());
+				+ "Master of this reservation is " + reservation.getMaster().getName() + ".");
 	}
 	
 	/*

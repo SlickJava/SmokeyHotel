@@ -28,7 +28,7 @@ public class Guest extends Person{
 	 * @param creditCardNumber
 	 */
 	public Guest(LocalDate dob, String name, String address,
-			long phone, long creditCardNumber, LocalDate expiryDate, String creditCardName, int creditCardSecurity, long ID) {
+			String phone, long creditCardNumber, LocalDate expiryDate, String creditCardName, int creditCardSecurity, long ID) {
 		super(dob, name, address, phone);
 		this.creditCardNumber = creditCardNumber;
 		this.expiryDate = expiryDate;
