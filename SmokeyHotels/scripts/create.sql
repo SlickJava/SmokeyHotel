@@ -2,11 +2,8 @@ DROP TABLE IF EXISTS guest_occupancy;
 DROP TABLE IF EXISTS occupancy;
 DROP TABLE IF EXISTS guest_reservation;
 DROP TABLE IF EXISTS reservation;
-DROP TABLE IF EXISTS reservation_room;
-DROP TABLE IF EXISTS room_history;
 DROP TABLE IF EXISTS room;
 DROP TABLE IF EXISTS room_type;
-DROP TABLE IF EXISTS room_status;
 DROP TABLE IF EXISTS guest;
 -- Add data finding if reservation is occupying room.
 
@@ -32,15 +29,6 @@ CREATE TABLE room_type
     description text NOT NULL,
     capacity    int NOT NULL
 );
-
-
-CREATE TABLE room_status
-(
-    id          SERIAL PRIMARY KEY,
-    code        text NOT NULL,
-    description text NOT NULL
-);
-
 
 CREATE TABLE room
 (
