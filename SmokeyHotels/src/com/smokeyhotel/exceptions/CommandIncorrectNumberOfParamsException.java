@@ -7,7 +7,7 @@ package com.smokeyhotel.exceptions;
  * @author InsaneAboutTNT
  *
  */
-public class IncorrectNumberOfParamsException extends RuntimeException {
+public class CommandIncorrectNumberOfParamsException extends RuntimeException {
 
 	/**
 	 * Serial version UID
@@ -16,8 +16,9 @@ public class IncorrectNumberOfParamsException extends RuntimeException {
 	/**
 	 * @param message
 	 */
-	public IncorrectNumberOfParamsException(int number, int expectedNumber) {
-		super("Incorrect number of parameters entered, expected number: " + expectedNumber
+	public CommandIncorrectNumberOfParamsException(int number, int expectedNumber) {
+		super("Incorrect number of parameters entered in the command"
+				+ ", expected number: " + expectedNumber
 				+ " input number: " + number);
 		// TODO Auto-generated constructor stub
 	}
