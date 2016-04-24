@@ -7,8 +7,8 @@ public class Room_SingleBed extends Room{
 
 	public Room_SingleBed(int roomNumber, 
 			boolean vacant,  double price,
-			Guest[] occupants, long ID) {
-		super(roomNumber, 1, vacant,  price, occupants, ID);
+			Guest[] occupants) {
+		super(roomNumber, 1, vacant,  price, occupants);
 		// TODO Auto-generated constructor stub
 	}
 

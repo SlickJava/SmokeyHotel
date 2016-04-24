@@ -6,8 +6,8 @@ import com.smokeyhotel.room.Room;
 public class Room_DoubleBed extends Room{
 
 	public Room_DoubleBed(int number, boolean vacant, 
-			double price, Guest[] occupants, long ID) {
-		super(number, 2, vacant, price, occupants, ID);
+			double price, Guest[] occupants) {
+		super(number, 2, vacant, price, occupants);
 		// TODO Auto-generated constructor stub
 	}
 	

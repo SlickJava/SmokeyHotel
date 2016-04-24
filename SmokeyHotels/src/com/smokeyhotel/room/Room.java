@@ -24,7 +24,7 @@ public class Room {
 	 * @param occupants
 	 * @param maxNumberOfOccupants
 	 */
-	public Room(int roomNumber, boolean vacant, double price, Guest[] occupants, int maxNumberOfOccupants)
+	public Room(int roomNumber, int maxNumberOfOccupants, boolean vacant, double price, Guest[] occupants)
 	{
 		this.number = roomNumber;
 		this.vacant = vacant;
