@@ -36,17 +36,15 @@ public class Database {
 	public Database() {
 		 guestMapper = new ListResultMapper<Guest>() {
 			public Guest mapRow(ResultSet resultSet) throws SQLException {
-				return new Guest(resultSet.getDate("dob").toInstant()
-						.atZone(ZoneId.systemDefault()).toLocalDate(),
+				return new Guest(resultSet.getDate("dob").toLocalDate(),
 						resultSet.getString("name"),
 						resultSet.getString("address"),
-						resultSet.getString("phoneNumber"),
+						resultSet.getString("phone"),
 						resultSet.getString("creditCardNumber"),
-						resultSet.getDate("expiryDate").toInstant()
-						.atZone(ZoneId.systemDefault()).toLocalDate(),
+						resultSet.getDate("expiryDate").toLocalDate(),
 						resultSet.getString("creditCardName"),
-						resultSet.getInt("creditCardSecurityNumber"),
-						resultSet.getLong("userUniqueId"));
+						resultSet.getInt("creditCardSecurity"),
+						resultSet.getLong("guestId"));
 			}
 		};
 		roomMapper = new ListResultMapper<Room>() {
@@ -94,7 +92,7 @@ public class Database {
 				+ "select id from guest where name=?)")
 			.params(reservation.getCode(), reservation.getMaster().getName())
 			.executeUpdate();
-		// Insert into JUNCTION TABLE
+		// TODO change
 		// Note: maybe change Reservation.id to Reservation.reservationCode
 		awesomeDatabase.createQuery("insert into guest_reservation"
 				+ "(reservation_id, guest_id) values"
@@ -125,8 +123,8 @@ public class Database {
 		// Works
 		awesomeDatabase.createQuery("insert into guest"
 				+ " (dob, name, address, phone, creditCardNumber,"
-				+ " expiryDate, creditCardName, creditCardSecurity)"
-				+ " values (?, ?, ?, ?, ?, ?, ?, ?)")
+				+ " expiryDate, creditCardName, creditCardSecurity, guestId)"
+				+ " values (?, ?, ?, ?, ?, ?, ?, ?, ?)")
 			// could've use params(), but imo this looks better
 			// Lambdas FOR THE WIN
 		    .setStatement(statement -> {
@@ -138,8 +136,9 @@ public class Database {
 		    	statement.setDate(6, Date.valueOf(guest.getExpiryDate()));
 		    	statement.setString(7, guest.getCreditCardName());
 		    	statement.setInt(8, guest.getCreditCardSecurity());
+		    	statement.setLong(9, guest.getID());
 		    	// contunie!!!!typo :)
-		    });
+		    }).executeUpdate();
 	}
 	/**
 	 * Add a room
@@ -178,14 +177,22 @@ public class Database {
 		// TOOOODO TODO
 		// Del reservation, and del these guests.
 		awesomeDatabase.createQuery("delete from reservation where reservationCode=?")
-			.params(reservation.getCode()).executeBatch();
+			.params(reservation.getCode()).executeUpdate();
+		// Del links from guest_occupancy
+		awesomeDatabase.createQuery("delete from guest_occupancy where guestUniqueId=?")
+			.setStatement(statement -> {
+				for (Guest guest: reservation.getOccupants()) {
+					statement.setLong(1, guest.getID());
+					statement.addBatch();
+				}
+			}).executeBatch();
 		awesomeDatabase.createQuery("delete from guest where guestUniqueId=?")
 			.setStatement(statement -> {
 				for (Guest guest: reservation.getOccupants()) {
 					statement.setLong(1, guest.getID());
 					statement.addBatch();
 				}
-			}).executeUpdate();
+			}).executeBatch();
 		//awesomeDa
 	}
 	//public void 
