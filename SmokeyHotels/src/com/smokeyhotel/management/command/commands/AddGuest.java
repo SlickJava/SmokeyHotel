@@ -73,9 +73,9 @@ public class AddGuest extends Command{
 		return this.inputs[3];
 	}
 	
-	public long getCreditCardNumber()
+	public String getCreditCardNumber()
 	{
-		return Long.parseLong(this.inputs[4]);
+		return this.inputs[4];
 	}
 	
 	public LocalDate getCreditCardExipryDate()
