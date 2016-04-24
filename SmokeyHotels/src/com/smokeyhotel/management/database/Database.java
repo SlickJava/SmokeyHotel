@@ -28,6 +28,7 @@ import com.smokeyhotel.room.Room;
 public class Database {
 	private AwesomeDatabase awesomeDatabase;
 	private ListResultMapper<Guest> guestMapper;
+	private ListResultMapper<Room> roomMapper;
 	/**
 	 * Initiate a data source and
 	 * make a new AwesomeDatabase to use
@@ -40,12 +41,21 @@ public class Database {
 						resultSet.getString("name"),
 						resultSet.getString("address"),
 						resultSet.getString("phoneNumber"),
-						resultSet.getLong("creditCardNumber"),
+						resultSet.getString("creditCardNumber"),
 						resultSet.getDate("expiryDate").toInstant()
 						.atZone(ZoneId.systemDefault()).toLocalDate(),
 						resultSet.getString("creditCardName"),
 						resultSet.getInt("creditCardSecurityNumber"),
 						resultSet.getLong("userUniqueId"));
+			}
+		};
+		roomMapper = new ListResultMapper<Room>() {
+			public Room mapRow(ResultSet resultSet) throws SQLException {
+//				return new Room(resultSet.getInt("number"),
+//						resultSet.getBoolean("vacant"),
+//						resultSet.getDouble("price"),
+//						);
+				return null;
 			}
 		};
 		try {
@@ -68,14 +78,14 @@ public class Database {
 	/*
 	 * DO NOT USE YET!!! (unless you want to ruin the database
 	 * and your own life.)
-	 * (TODO complete this stuff)
+	 * 
+	 * CREATE (insert)
 	 * */
 	/**
 	 * Add a reservation
 	 * @param reservation
 	 */
 	public void insertReservation(Reservation reservation) {
-		// TODO do later
 		// Maybe do: if exists (insert into guest values( ... ))
 		// RESERVATION table.
 		awesomeDatabase.createQuery("insert into reservation"
@@ -112,7 +122,7 @@ public class Database {
 	 * @param guest
 	 */
 	public void insertGuest(Guest guest) {
-		// TODO
+		// Works
 		awesomeDatabase.createQuery("insert into guest"
 				+ " (dob, name, address, phone, creditCardNumber,"
 				+ " expiryDate, creditCardName, creditCardSecurity)"
@@ -137,18 +147,20 @@ public class Database {
 	 */
 	public void insertRoom(Room room) {
 		// TODO
-		awesomeDatabase.createQuery("insert into room (number) values (?)")
+		awesomeDatabase.createQuery("insert into room (number, roomTypeId,"
+				+ "currentReservationId, isOccupied) values (?, ?, ?, ?)")
 			.params(room.getNumber()).executeUpdate();
 	}
+	/* READ (get)*/
 	public ArrayList<Guest> getAllGuests() {
-		// TODO
 		// Get ArrayList from the List
 		ArrayList<Guest> guests = new ArrayList<>(awesomeDatabase.createQuery("select * from guest")
 				.executeQuery(guestMapper));
 		return guests;
 	}
 	public ArrayList<Room> getAllRooms() {
-		return null;
+		return new ArrayList<>(awesomeDatabase.createQuery("select * from rooms")
+			.executeQuery(roomMapper));
 	}
 	public Reservation getAllReservations() {
 		// TODO
