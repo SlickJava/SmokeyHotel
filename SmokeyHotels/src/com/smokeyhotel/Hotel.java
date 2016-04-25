@@ -14,6 +14,8 @@ public class Hotel {
 	
 	public static int amountOfRooms;
 	public static String hotelName;
+	public static boolean firstTimeStartup;
+	
 	/**
 	 * Example of how a Registration is made.
 	 */

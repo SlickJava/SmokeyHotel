@@ -11,6 +11,8 @@ import com.smokeyhotel.management.command.commands.Help;
 import com.smokeyhotel.management.command.commands.ListGuests;
 import com.smokeyhotel.management.command.commands.ListRooms;
 import com.smokeyhotel.management.database.Database;
+import com.smokeyhotel.management.properties.FirstTimeStartupProperty;
+import com.smokeyhotel.management.properties.HotelProperties;
 
 public class Manager {
 	
@@ -27,6 +29,8 @@ public class Manager {
 	{
 		scanner = new Scanner(System.in);
 		database = new Database();
+		HotelProperties hp = new HotelProperties();
+		FirstTimeStartupProperty ftsp = new FirstTimeStartupProperty();
 		
 		//ReservationManager.reservations = database.getAllReservations();
 		//ReservationManager.rooms = database.getAllRooms();
