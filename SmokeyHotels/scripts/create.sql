@@ -25,9 +25,10 @@ CREATE TABLE guest
 CREATE TABLE room_type
 (
     id          int AUTO_INCREMENT PRIMARY KEY,
-    code        text NOT NULL,
+    name        text NOT NULL,
     description text NOT NULL,
-    capacity    int NOT NULL
+    capacity    int NOT NULL,
+    price numeric NOT NULL
 );
 
 CREATE TABLE room
@@ -37,9 +38,11 @@ CREATE TABLE room
     vacant BOOLEAN NOT NULL,
     price NUMERIC NOT NULL,
     maxNumberOfOccupants int,
-    roomTypeId    int NOT NULL REFERENCES room_type(id),
-    currentReservationId int REFERENCES reservation(id),
-    isOccupied BOOLEAN NOT NULL
+    roomTypeId    int NOT NULL
+    currentReservationId int,
+    isOccupied BOOLEAN NOT NULL,
+    FOREIGN KEY (roomTypeId) REFERENCES room_type (id),
+    FOREIGN KEY (currentReservationId) REFERENCES reservation (id)
 );
 
 
@@ -57,7 +60,8 @@ CREATE TABLE reservation
 (
     id                  int AUTO_INCREMENT PRIMARY KEY,
     reservationCode    text NOT NULL,
-    masterGuestId int NOT NULL REFERENCES guest(id)
+    masterGuestId int NOT NULL,
+    FOREIGN KEY (masterGuestId)  REFERENCES guest (id)
 --    day_start           date NOT NULL,
 --    day_end             date NOT NULL
 );
@@ -72,16 +76,20 @@ CREATE TABLE reservation
 CREATE TABLE occupancy
 (
     id                  int AUTO_INCREMENT PRIMARY KEY,
-    roomId             int NOT NULL REFERENCES room(id) 
+    roomId             int NOT NULL
+    FOREIGN KEY (roomId) REFERENCES room (id) 
 );
 
 
 CREATE TABLE guest_occupancy
 (
     id              int AUTO_INCREMENT PRIMARY KEY,
-    occupancyId    int NOT NULL REFERENCES occupancy(id),
-    guestId        int  NOT NULL REFERENCES guest(id),
-    reservationId  int REFERENCES reservation(id)
+    occupancyId    int,
+    guestId        int,
+    reservationId  int,
+    FOREIGN KEY (occupancyId) REFERENCES occupancy (id),
+    FOREIGN KEY (guestId) REFERENCES guest (id),
+    FOREIGN KEY (reservationId) REFERENCES reservationId (id)
 --    day_start       date NOT NULL,
 --    day_end         date NOT NULL
 );
