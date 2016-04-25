@@ -1,15 +1,9 @@
 package com.smokeyhotel;
 
-import java.time.LocalDate;
-
-import javax.sql.DataSource;
-
-import com.awesome.db.Query;
 import com.smokeyhotel.management.Manager;
-import com.smokeyhotel.management.reservation.Reservation;
 import com.smokeyhotel.management.reservation.ReservationManager;
-import com.smokeyhotel.people.guest.Guest;
 import com.smokeyhotel.room.Room;
+import com.smokeyhotel.room.RoomType;
 
 /**
  * Main Hotel.java class. Initiation happens here.
@@ -20,18 +14,24 @@ public class Hotel {
 	
 	public static int amountOfRooms;
 	public static String hotelName;
+	public static boolean firstTimeStartup;
+	
 	/**
 	 * Example of how a Registration is made.
 	 */
 	public static void main(String args[])
 	{
 		//Next few lines are for teseting
-		ReservationManager.rooms.add(new Room(1,2,true, 20,null));
-		ReservationManager.rooms.add(new Room(2,1,true, 20,null));
-		ReservationManager.rooms.add(new Room(3,1,true, 20,null));
-		ReservationManager.rooms.add(new Room(4,1,true, 20,null));
-		ReservationManager.rooms.add(new Room(5,1,true, 20,null));
-		ReservationManager.rooms.add(new Room(6,1,true, 20,null));
+		RoomType luxury = new RoomType("Luxury", 2, 4000.00);
+		ReservationManager.rooms.add(new Room(1,luxury,true));
+		ReservationManager.rooms.add(new Room(2,luxury,true));
+		ReservationManager.rooms.add(new Room(3,luxury,true));
+		ReservationManager.rooms.add(new Room(4,luxury,true));
+		ReservationManager.rooms.add(new Room(5,luxury,true));
+		ReservationManager.rooms.add(new Room(6,luxury,true));
+
+		
+
 		
 
 		

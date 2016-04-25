@@ -12,8 +12,10 @@ public class ListGuests extends Command{
 
 	@Override
 	public void onExecute() {
-		
-		ReservationManager.printGuests();
+		if(ReservationManager.guests.size() != 0)
+			ReservationManager.printGuests();
+		else
+			System.out.println("No guests found.");
 		
 	}
 	

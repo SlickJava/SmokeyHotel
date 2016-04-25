@@ -9,7 +9,10 @@ import com.smokeyhotel.management.command.commands.AddReservation;
 import com.smokeyhotel.management.command.commands.DeleteReservation;
 import com.smokeyhotel.management.command.commands.Help;
 import com.smokeyhotel.management.command.commands.ListGuests;
+import com.smokeyhotel.management.command.commands.ListRooms;
 import com.smokeyhotel.management.database.Database;
+import com.smokeyhotel.management.properties.FirstTimeStartupProperty;
+import com.smokeyhotel.management.properties.HotelProperties;
 
 public class Manager {
 	
@@ -19,8 +22,20 @@ public class Manager {
 	
 	public Manager()
 	{
+		this.init();
+	}
+	
+	public void init()
+	{
 		scanner = new Scanner(System.in);
 		database = new Database();
+		HotelProperties hp = new HotelProperties();
+		FirstTimeStartupProperty ftsp = new FirstTimeStartupProperty();
+		
+		//ReservationManager.reservations = database.getAllReservations();
+		//ReservationManager.rooms = database.getAllRooms();
+		//ReservationManager.guests = database.getAllGuests();
+		
 		this.addCommands();
 	}
 	
@@ -28,8 +43,9 @@ public class Manager {
 	{
 		commands.add(new AddReservation(database));
 		commands.add(new DeleteReservation(database));
-		commands.add(new AddGuest());
+		commands.add(new AddGuest(database));
 		commands.add(new ListGuests());
+		commands.add(new ListRooms());
 		commands.add(new Help());
 	}
 	

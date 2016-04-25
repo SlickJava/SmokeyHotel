@@ -5,16 +5,20 @@ import java.time.format.DateTimeFormatter;
 import java.util.Random;
 
 import com.smokeyhotel.management.command.Command;
+import com.smokeyhotel.management.database.Database;
 import com.smokeyhotel.management.reservation.ReservationManager;
 import com.smokeyhotel.people.guest.Guest;
 
 public class AddGuest extends Command{
+	
+	private Database database;
 
-	public AddGuest() {
+	public AddGuest(Database database) {
 		super("AddGuest", "addguest", new String[] {
 				"Name", "DateOfBirth", "Address",
 				"Phone", "creditCardNumber", "expiryDate",
 				 "creditCardName", "creditCardSecurity"}, "Adds a guest.");
+		this.database = database;
 		// TODO Auto-generated constructor stub
 	}
 
@@ -43,7 +47,7 @@ public class AddGuest extends Command{
 				this.getPhone(), this.getCreditCardNumber(), this.getCreditCardExipryDate(), 
 				this.getCreditCardName(), this.getCreditCardSecurity(), ID);
 		
-		ReservationManager.guests.add(guest);
+		ReservationManager.addGuest(guest, database);
 		
 		System.out.println("Added guest " + guest.getName() + " with the ID of " + guest.getID() + ".");
 		//System.out.println(ReservationManager.guests.size() + " size of guests arraylist (testing purposes)");
