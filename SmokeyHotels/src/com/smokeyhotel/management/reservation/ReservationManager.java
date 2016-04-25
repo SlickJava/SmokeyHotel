@@ -21,11 +21,12 @@ public class ReservationManager {
 		//TODO uncomment the 3 statements below after db is finished
 		//database.insertReservation(reservation);
 		//updateRooms(database);
-		//addGuests(database);
 		System.out.println("Reservation " + reservation.getCode() + " created. Includes " 
 				+ reservation.getOccupants().length + " guests and " 
 				+ reservation.getRooms().length + " rooms. "
 				+ "Master of this reservation is " + reservation.getMaster().getName() + ".");
+		
+		//reservations = database.getAllReservations();
 	}
 	
 	/*
@@ -172,24 +173,25 @@ public class ReservationManager {
 		return true;
 	}
 	
-	public static void addGuests(Database database)
+	public static void addGuest(Guest guest, Database database)
 	{
-		for(Room room : rooms)
-		{
-			guests.addAll(Arrays.asList(room.getOccupants()));
-		}
-		for(Guest guest : guests)
-		{
-			database.insertGuest(guest);
-		}
+		//will remove once database is functional
+		guests.add(guest);
+		
+		database.insertGuest(guest);
+		guests = database.getAllGuests();
 	}
-	
+
 	public static void updateRooms(Database database)
 	{
+		//database.deleteAllRooms();
+
 		for(Room r00m : rooms)
 		{
 			database.insertRoom(r00m);
 		}
+		
+		rooms = database.getAllRooms();
 	}
 	
 	public static void addResRooms(Room[] room, Database database)

@@ -14,8 +14,8 @@ public class Room {
 	private double price;
 	private Guest[] occupants;
 	private int maxNumberOfOccupants;
+	private RoomType roomType;
 	
-
 	/**
 	 * Constructor
 	 * @param roomNumber
@@ -24,15 +24,24 @@ public class Room {
 	 * @param occupants
 	 * @param maxNumberOfOccupants
 	 */
-	public Room(int roomNumber, int maxNumberOfOccupants, boolean vacant, double price, Guest[] occupants)
+	public Room(int roomNumber, RoomType roomType,  boolean vacant)
 	{
 		this.number = roomNumber;
 		this.vacant = vacant;
-		this.price = price;
-		this.occupants = occupants;
-		this.maxNumberOfOccupants = maxNumberOfOccupants;
+		this.occupants = null;
+		this.roomType = roomType;
+		this.price = roomType.getPrice();
+		this.maxNumberOfOccupants = roomType.getAmountOfOccupants();
 	}
 	
+	public void setRoomType(RoomType roomType) {
+		this.roomType = roomType;
+	}
+
+	public RoomType getRoomType() {
+		return roomType;
+	}
+
 	public int getMaxNumberOfOccupants() {
 		return maxNumberOfOccupants;
 	}
