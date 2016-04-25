@@ -9,8 +9,8 @@ import com.smokeyhotel.management.command.commands.AddReservation;
 import com.smokeyhotel.management.command.commands.DeleteReservation;
 import com.smokeyhotel.management.command.commands.Help;
 import com.smokeyhotel.management.command.commands.ListGuests;
+import com.smokeyhotel.management.command.commands.ListRooms;
 import com.smokeyhotel.management.database.Database;
-import com.smokeyhotel.management.reservation.ReservationManager;
 
 public class Manager {
 	
@@ -41,6 +41,7 @@ public class Manager {
 		commands.add(new DeleteReservation(database));
 		commands.add(new AddGuest(database));
 		commands.add(new ListGuests());
+		commands.add(new ListRooms());
 		commands.add(new Help());
 	}
 	

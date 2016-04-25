@@ -178,8 +178,8 @@ public class ReservationManager {
 		//will remove once database is functional
 		guests.add(guest);
 		
-		database.insertGuest(guest);
-		guests = database.getAllGuests();
+		//database.insertGuest(guest);
+		//guests = database.getAllGuests();
 	}
 
 	public static void updateRooms(Database database)
