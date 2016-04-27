@@ -6,9 +6,7 @@ import java.io.IOException;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Properties;
 
 import com.awesome.db.AwesomeDatabase;
@@ -72,7 +70,12 @@ public class Database {
 			e.printStackTrace();
 		}
 	}
-
+	/**
+	 * Returns awesomeDatabase
+	 */
+	public AwesomeDatabase getAwesomeDatabase() {
+		return this.awesomeDatabase;
+	}
 	/*
 	 * DO NOT USE YET!!! (unless you want to ruin the database
 	 * and your own life.)
@@ -92,28 +95,31 @@ public class Database {
 				+ "select id from guest where name=?)")
 			.params(reservation.getCode(), reservation.getMaster().getName())
 			.executeUpdate();
-		// TODO change
-		// Note: maybe change Reservation.id to Reservation.reservationCode
-		awesomeDatabase.createQuery("insert into guest_reservation"
-				+ "(reservation_id, guest_id) values"
-				+ "((select id from reservation where reservation_code=?,"
-				+ "(select id from guest where name=?))")
-			// Lambdas FTW!!
+		// occupancyId, guestId, reservationId
+		awesomeDatabase.createQuery("insert into guest_occupancy"
+				+ "(occupancyId, guestId, reservationId) values("
+				+ "(select occupancy.id from room join occupancy"
+				+ "on (room.occupancyId = occupancy.id) where room.number=?),"
+				+ "(select id from guest where id=?),"
+				+ "(select id from reservation where reservationCode=?))")
 			.setStatement(statement -> {
-				for (Guest guest: reservation.getOccupants()) {
-					// Change to reservationCode?
-					statement.setLong(1, reservation.getCode());
-					statement.setString(2, guest.getName());
+				for (Room room: reservation.getRooms()) {
+					for (Guest guest: room.getOccupants()) {
+						statement.setInt(1, room.getNumber());
+						statement.setLong(2, reservation.getCode());
+						statement.setLong(3, guest.getID());
+						statement.addBatch();
+					}
+				}
+			}).executeBatch();
+		// Occupy rooms
+		awesomeDatabase.createQuery("alter table room set isOccupied=1 where room.number=?")
+			.setStatement(statement -> {
+				for (int roomNumber: reservation.getRoomNumbers()) {
+					statement.setInt(1, roomNumber);
 					statement.addBatch();
 				}
 			}).executeBatch();
-	}
-	
-	/**
-	 * Returns awesomeDatabase
-	 */
-	public AwesomeDatabase getAwesomeDatabase() {
-		return this.awesomeDatabase;
 	}
 	/**
 	 * Add a guest
@@ -186,14 +192,14 @@ public class Database {
 					statement.addBatch();
 				}
 			}).executeBatch();
-		awesomeDatabase.createQuery("delete from guest where guestUniqueId=?")
+		awesomeDatabase.createQuery("alter table room set isOccupied=0 where room.number=?")
 			.setStatement(statement -> {
-				for (Guest guest: reservation.getOccupants()) {
-					statement.setLong(1, guest.getID());
+				for (int roomNumber: reservation.getRoomNumbers()) {
+					statement.setInt(1, roomNumber);
 					statement.addBatch();
 				}
 			}).executeBatch();
-		//awesomeDa
+		
 	}
 	//public void 
 }
