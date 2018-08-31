@@ -1,7 +1,7 @@
 # Smokey Hotel
 The smokiest hotel ever in existence!
 
-##Upcoming Features
+## Upcoming Features
 * Reservation System
 * Search Function
 * Account Registration
